@@ -1,6 +1,8 @@
 package com.shilpa.LibraryManagementSystem.Models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -22,7 +24,8 @@ public class Lending {
 
     private LocalDate lendingDate;
     private LocalDate returnDate;
-    private Boolean isReturned;
+
+    private Boolean isReturned = false;
 
 
 }

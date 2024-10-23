@@ -1,6 +1,7 @@
 package com.shilpa.LibraryManagementSystem.Controllers;
 
 import com.shilpa.LibraryManagementSystem.Models.Lending;
+import com.shilpa.LibraryManagementSystem.Services.LendingDetailsResponse;
 import com.shilpa.LibraryManagementSystem.Services.LendingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,9 @@ public class LendingController {
     private LendingService lendingService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Lending> findLendingById(@PathVariable String id) {
+    public ResponseEntity<LendingDetailsResponse> findLendingById(@PathVariable String id) {
         try {
-            Lending lending = lendingService.findLendingById(id);
+            LendingDetailsResponse lending = lendingService.findLendingById(id);
             return ResponseEntity.ok(lending);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

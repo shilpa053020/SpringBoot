@@ -13,23 +13,26 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class UserRepo implements CustomUser {
+public class UserImplementation implements CustomUser {
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
     @Override
     public List<User> findAllUsers() {
+
         return mongoTemplate.findAll(User.class);
     }
 
     @Override
     public User findById(String id) {
+
         return mongoTemplate.findById(id, User.class);
     }
 
     @Override
     public void createUser(User user) {
+
         mongoTemplate.save(user);
     }
 

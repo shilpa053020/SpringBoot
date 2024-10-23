@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class LendingRepo implements CustomLending{
+public class LendingImplementation implements CustomLending{
     @Autowired
     private MongoTemplate mongoTemplate;
 
@@ -26,6 +26,15 @@ public class LendingRepo implements CustomLending{
         if (book == null) {
             throw new RuntimeException("Book not found with ID: " + lending.getBookId());
         }
+        if (!book.getIsAvailable()) {
+            throw new RuntimeException("Book with ID: " + lending.getBookId() + " is currently not available for lending.");
+        }
+
+        // Mark the book as not available
+        book.setIsAvailable(false);
+        mongoTemplate.save(book);
+
+        lending.setIsReturned(false);
         return mongoTemplate.save(lending);
     }
 
